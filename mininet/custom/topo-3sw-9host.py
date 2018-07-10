@@ -3,8 +3,8 @@
 Custom Ring Network Topology builded on Mininet
 Class of Computer Networks
 Professor: Leobino Nascimento
-Students: Douglas Wiliam F. de Souza <dougl.wil@gmail.com>
-
+Students:	Douglas Wiliam F. de Souza <dougl.wil@gmail.com>
+		Jorge Lukas Bandarra Barbosa <lukasbandarra@gmail.com>
 Three directly connected switches plus three hosts for each one:
           
                     controller
@@ -76,15 +76,15 @@ def main():
 	net = Mininet(topo = topo, controller = RemoteController)
 	net.start()
 
-	#print "Testando conectividade da rede"
-	net.pingAll()
-
 
 	for i in xrange(9):
 		h = net.get('h%d' % (i + 1))
 		for j in xrange(9):
 			h_dst = net.get('h%d' % (j+1))
 			h.setARP(h_dst.IP(), h_dst.MAC())
+
+       #print "Testando conectividade da rede"
+       #net.pingAll()
 
 	#Setting IPs
 	h1 = net.get('h1')
