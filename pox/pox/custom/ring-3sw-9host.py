@@ -34,26 +34,27 @@ def _handle_PacketIn (Event):
 
 	nw_src = match.get_nw_src()#Ip de quem envia o packet
 	nw_dst = match.get_nw_dst()#IP de quem recebe o packet
-#	dpid = match.ofp.dpid
 	dpid = Event.connection.dpid #match com forca
 
 	msg = of.ofp_flow_mod()#Encapsula o comando para criacao de uma tabela de entrada no switch
 
-	print "Ip de Origem = " + "-".join(nw_src)
+	print "Ip de Destino = " + str(nw_dst)
 	# Se o switch i requisitou uma regra, o controlador o orienta a enviar o pacote na porta j
 	for i in xrange(1,4):
 		print "Entrou for i"
 		for j in xrange(1,4):
 			print "Entrou for j"
-			ip = "10.10." + str(i) + "." + str(j)
-			print "Testando IP de origem para " + ip
-			if( (dpid == i) and ( nw_src == (IPAddr(ip), 24) )):
+			ipBase = "10.10." + str(i) + "." + str(j)
+			ip = repr(ipBase)
+			ip ="(IPAddr(" +  ip  +"), 32)" 
+			print "Testando IP de Destino para " + ip
+			if( (dpid == i) and ( str(nw_dst) == ip ) ):
 				print "Entrou if"
 				print "IP:" +  ip
 				msg.actions.append(of.ofp_action_output(port = j))
-				msg.match.set_nw_dst(match.get_nw_dst())
+				msg.match.set_nw_dst(IPAddr(ipBase), 32)
+				Event.connection.send(msg)
 
-	Event.connection.send(msg)
 	#msg.match.set_nw_dst(IPAddr("10.10.1.0"),24)
 	#msg.match.set_nw_dst(IPAddr("10.10.2.0"),24)
 	#msg.match.set_nw_dst(IPAddr("10.10.3.0"),24)
