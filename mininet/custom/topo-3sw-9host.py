@@ -52,7 +52,7 @@ class JougTopo( Topo ):
 	switchB = self.addSwitch( 's2' )
 	switchC = self.addSwitch( 's3' )
 
-        # Add links
+	# Add links
 	self.addLink( host1A, switchA )
 	self.addLink( host2A, switchA )
 	self.addLink( host3A, switchA )
@@ -75,16 +75,6 @@ def main():
 	topo = JougTopo()
 	net = Mininet(topo = topo, controller = RemoteController)
 	net.start()
-
-
-	for i in xrange(9):
-		h = net.get('h%d' % (i + 1))
-		for j in xrange(9):
-			h_dst = net.get('h%d' % (j+1))
-			h.setARP(h_dst.IP(), h_dst.MAC())
-
-       #print "Testando conectividade da rede"
-       #net.pingAll()
 
 	#Setting IPs
 	h1 = net.get('h1')
@@ -112,6 +102,16 @@ def main():
 	h8.setIP('10.10.3.2/24')
 	h9.setIP('10.10.3.3/24')
 
+	for i in xrange(9):
+		h = net.get('h%d' % (i + 1))
+		h.cmd("ip route add default dev %s-eth0" % ('h%d' % (i + 1)))
+		for j in xrange(9):
+			h_dst = net.get('h%d' % (j+1))
+			h.setARP(h_dst.IP(), h_dst.MAC())
+       
+	#print "Testando conectividade da rede"
+	#net.pingAll()
+	
 	CLI(net)
 	net.stop()
 

@@ -2,4 +2,4 @@
 # compiled source #
 ###################
 
-*pyc
+*.pyc
