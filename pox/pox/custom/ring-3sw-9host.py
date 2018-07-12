@@ -4,7 +4,7 @@ Custom Ring Network Topology Controller builded on  Mininet
 Class of Computer Networks
 Professor: Leobino Nascimento
 Students:	Douglas Wiliam F. de Souza <dougl.wil@gmail.com>
-		Jorge Lukas Bandarra Barbosa <bandarrabarbosa@gmail.com>
+			Jorge Lukas Bandarra Barbosa <bandarrabarbosa@gmail.com>
 
 Three directly connected switches plus three hosts for each one:
 
@@ -30,6 +30,8 @@ from pox.lib.addresses import IPAddr, IPAddr6, EthAddr
 
 def _handle_PacketIn (event):
 
+	# Se o switch requisitou uma regra, o controlador o orienta a enviar o pacote por um porta
+
 	mapa=	[
 				[0,4,5],
 				[4,0,5],
@@ -47,16 +49,13 @@ def _handle_PacketIn (event):
 
 	nw_src = match.get_nw_src()#Ip de quem envia o packet	
 	nw_dst = match.get_nw_dst()#IP de quem recebe o packet	
-	dpid = event.connection.dpid #match com forca
-	
-	# Se o switch i requisitou uma regra, o controlador o orienta a enviar o pacote na porta j
-	
+	dpid = event.connection.dpid #match com forca	
 	
 	ipDst = str(nw_dst).split("'")[1]
 	subrede = ipDst.split(".")[2]
 	porta = ipDst.split(".")[3]
 	
-	msg = of.ofp_flow_mod()#Encapsula o comando para criacao de uma tabela de entrada no switch
+	msg = of.ofp_flow_mod()	#Encapsula o comando para criacao de uma tabela de entrada no switch
 	msg.match.dl_type = 0x800
 	msg.match.nw_dst = IPAddr(ipDst)
 
@@ -71,9 +70,7 @@ def _handle_PacketIn (event):
 	elif(dpid != int(subrede)):
 		print "Entrou else"
 		msg.actions.append(of.ofp_action_output(port = mapa[int(dpid)-1][int(subrede)-1]))
-		
-		
-	
+
 
 	event.connection.send(msg)
 	
