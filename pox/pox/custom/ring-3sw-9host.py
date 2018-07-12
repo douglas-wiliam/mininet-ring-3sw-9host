@@ -61,15 +61,15 @@ def _handle_PacketIn (event):
 	msg.match.nw_dst = IPAddr(ipDst)
 
 	if (porta == 255):
+		print "Entrou if"
 		msg.actions.append(of.ofp_action_output(port = of.OFPP_FLOOD))
 
-
 	elif(dpid == int(subrede) ):
-		print "Entrou if"	
+		print "Entrou elif"	
 		msg.actions.append(of.ofp_action_output(port = int(porta)))
 		
 	elif(dpid != int(subrede)):
-		print "Entrou elif"
+		print "Entrou else"
 		msg.actions.append(of.ofp_action_output(port = mapa[int(dpid)-1][int(subrede)-1]))
 		
 		
