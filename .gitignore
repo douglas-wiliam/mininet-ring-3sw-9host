@@ -3,4 +3,29 @@
 ###################
 
 *.pyc
-*class
+*.class
+
+###################
+# directories #
+###################
+.cache/
+oflops/
+oftest/
+openflow/
+loxigen/
+.wireshark/
+
+###################
+# Others files #
+###################
+.Xauthority
+.bash_history
+.bash_logout
+.bashrc
+.gitconfig
+.mininet_history
+.rnd
+.viminfo
+RelogioTCP/.classpath
+RelogioTCP/.gitattributes
+RelogioTCP/.project
