@@ -1,4 +1,4 @@
-# Ring Network with 2 Switches 9 Hosts Builded on Mininet
+# Ring Network with 2 Switches 9 Hosts Built on Mininet
 
 Class of Computer Networks  
 Professor: Leobino Nascimento  
