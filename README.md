@@ -2,4 +2,4 @@
 
 Class of Computer Networks  
 Professor: Leobino Nascimento  
-Students: Douglas Wiliam F. de Souza, Jorge Lukas Bandarra  
+Students: Douglas Wiliam F. de Souza, Jorge Lukas Bandarra, Matheus Oliver de Carvalho Cerqueira, Hagamenon
