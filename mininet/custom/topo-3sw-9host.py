@@ -1,10 +1,13 @@
 """ 
 
-Custom Ring Network Topology builded on Mininet
+Custom Ring Network Topology Controller built on  Mininet
 Class of Computer Networks
 Professor: Leobino Nascimento
-Students:	Douglas Wiliam F. de Souza <dougl.wil@gmail.com>
-		Jorge Lukas Bandarra Barbosa <lukasbandarra@gmail.com>
+Students:  Douglas Wiliam F. de Souza <dougl.wil@gmail.com>,
+	   Jorge Lukas Bandarra Barbosa <bandarrabarbosa@gmail.com>,
+	   Matheus Oliver de Carvalho Cerqueira<escrevaparamatheus@gmail.com>,
+	   Hagamenon <>
+
 Three directly connected switches plus three hosts for each one:
           
                     controller
